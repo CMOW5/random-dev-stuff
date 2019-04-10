@@ -20,3 +20,33 @@ extensions
 - php dockblocker (neil brayfield)
 - python (microsoft)
 - vetur (pine wu)
+
+
+config 
+
+{
+    "eslint.options": {
+        "extensions": ["html", ".js", ".vue", ".jsx"]
+    },
+    "eslint.validate": [
+        {
+          "language": "vue",
+          "autoFix": true
+        },
+        {
+          "language": "html",
+          "autoFix": true
+        },
+        {
+          "language": "javascript",
+          "autoFix": true
+        }
+      ],
+      "editor.tabSize": 2,
+      "explorer.confirmDelete": false,
+      "workbench.startupEditor": "newUntitledFile",
+      "editor.suggestSelection": "first",
+      "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+      "python.jediEnabled": false,
+      "breadcrumbs.enabled": true
+}
