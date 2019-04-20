@@ -27,3 +27,10 @@ class Repository {
         return person;
     }
 }
+
+
+///////////
+
+for each model/entity object, have some sort of Factory or Builder, to transform it from the decoded format (maybe arrays ?) into objects. This way, the transformation is in only 1 place.
+use those Factories/Builders from the Controller layer
+make the Service and DAO layers work only with objects.
