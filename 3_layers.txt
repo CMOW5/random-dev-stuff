@@ -1,0 +1,29 @@
+Typically you have different layers:
+
+- A persistence layer to store data
+- Business layer to operate on data
+- A presentation layer to expose data
+
+Typically, each layer would use its own kind of objects:
+
+- Persistence Layer: Repositories, Entities
+- Business Layer: Services, Domain Objects
+- Presentation Layer: Controllers, DTOs
+
+This means each layer would only work with its own objects and never ever pass them to another layer.
+
+Why? Because you want each layer to be separated from the other layers. If you would use entities in your controller, your presentation would depend on how your data is stored. That's really bad. Your view has nothing to do with how the data is stored. It shouldn't even know that or how data is stored.
+
+Think of that: You change your database model, e.g. you add a new column to one of your database tables. If you pass the entities to your controller (or worse: your controller exposes them as JSON), a change at the database would result in a change in your presentation. If the entities are directly exposed as JSON, this might even result in changes in JavaScript or some other clients which are using the JSON. So a simple change in the database might require a change in the JavaScript front end, because you couple your layers very tight. You definitely don't want that in a real project.
+
+How? You doubt that this is practical, so just a small example of how to do that in (pseudo) code:
+
+class Repository {
+    public Person loadById(Long id) {
+        PersonEntity entity = loadEntityById(id);
+        Person person = new Person();
+        person.setId(entity.getId());
+        person.setName(entity.getFirstName + " " + entity.getLastName());
+        return person;
+    }
+}
