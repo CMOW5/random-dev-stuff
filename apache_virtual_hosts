@@ -1,0 +1,27 @@
+sudo mkdir -p /var/www/example.com/html
+
+sudo chown -R $USER:$USER /var/www/example.com/html
+
+sudo chmod -R 755 /var/www/example.com
+
+nano /var/www/example.com/html/index.html // the site folder 
+
+sudo nano /etc/apache2/sites-available/example.com.conf
+
+// copy this
+
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    ServerName example.com
+    ServerAlias www.example.com
+    DocumentRoot /var/www/example.com/html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+sudo a2ensite example.com.conf
+
+sudo systemctl restart apache2
+
+http://example.com
+
