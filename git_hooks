@@ -1,0 +1,21 @@
+// on vps
+
+cd /var
+mkdir repo && cd repo
+
+mkdir site.git && cd site.git
+git init --bare
+
+sudo nano post-receive
+
+#!/bin/sh
+git --work-tree=/var/www/laravel --git-dir=/var/repo/site.git checkout -f
+
+
+sudo chmod +x post-receive
+
+// on local
+
+git remote add production ssh://root@example.com/var/repo/site.git
+
+git push production master
